@@ -1,4 +1,8 @@
 import { Component } from 'react';
+import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+
+
 
 import css from './ContactForm.module.css'
 
@@ -6,15 +10,20 @@ class ContactForm extends Component {
   state = {
     name: '',
     number: '',
-  };
+    };
+    
+    nameInputId = nanoid();
+    numberInputId = nanoid();
+    
   handleInputChange = event => {
-    this.setState({ [event.currentTarget.name]: event.currentTarget.value });
+    const { name, value } = event.currentTarget;
+    this.setState({ [name]: value });
   };
 
   handleSubmitForm = event => {
     event.preventDefault();
-    
-      this.props.onSubmit(this.state)
+
+    this.props.onSubmit(this.state);
 
     this.reset();
   };
@@ -22,27 +31,32 @@ class ContactForm extends Component {
   reset = () => {
     this.setState({ name: '', number: '' });
   };
-  render() {
+    render() {
+        const { handleSubmitForm, nameInputId, handleInputChange, numberInputId } = this;
     return (
-      <form className={css.form} onSubmit={this.handleSubmitForm}>
-        <label>Name</label>
+      <form className={css.form} onSubmit={handleSubmitForm}>
+        <label htmlFor={nameInputId}>Name</label>
 
         <input
           type="text"
           name="name"
+          value={this.state.name}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
-          onChange={this.handleInputChange}
+          onChange={handleInputChange}
+          id={nameInputId}
         />
-        <label>Number</label>
+        <label htmlFor={numberInputId}>Number</label>
         <input
           type="tel"
           name="number"
+          value={this.state.number}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          onChange={this.handleInputChange}
+          onChange={handleInputChange}
+          id={numberInputId}
         />
         <button className={css.formBtn} type="submit">
           Add Contact
@@ -51,5 +65,9 @@ class ContactForm extends Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default ContactForm;
