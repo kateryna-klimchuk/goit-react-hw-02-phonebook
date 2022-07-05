@@ -1,0 +1,49 @@
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: start;
+    padding: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    border: 1px solid gray;
+    padding: 20px;
+}
+input {
+    padding: 12px;
+    outline: none;
+    border: 1px solid rgb(128, 121, 121);
+}
+
+h2 {
+    margin: 0;
+    padding: 20px;
+
+}
+
+.formBtn {
+    padding: 10px 20px;
+}
+
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+.contactsList {
+    padding: 0;
+    margin: 0;
+}
+
+/* .contactsItem {
+
+} */
