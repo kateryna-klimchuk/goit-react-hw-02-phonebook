@@ -1,5 +1,10 @@
 .filter {
+    width: 500px;
     display: flex;
     flex-direction: column;
     row-gap: 20px;
+    padding: 20px;
+
+    border: 1px solid rgb(112, 109, 109);
+    border-radius: 5px;
 }

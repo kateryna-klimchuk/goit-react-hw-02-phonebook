@@ -1,8 +1,10 @@
 .form {
+    width: 500px;
     display: flex;
     flex-direction: column;
     row-gap: 20px;
     border: 1px solid gray;
+    border-radius: 5px;
     padding: 20px;
 }
 
@@ -10,6 +12,7 @@ input {
     padding: 12px;
     outline: none;
     border: 1px solid rgb(128, 121, 121);
+    border-radius: 5px;
 }
 
 h2 {
