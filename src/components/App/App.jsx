@@ -5,7 +5,7 @@ import css from './App.module.css';
 
 import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
-import ContactList from 'components/ContactList'
+import ContactList from 'components/ContactList';
 
 class App extends Component {
   state = {
@@ -21,31 +21,22 @@ class App extends Component {
   addContact = ({ name, number }) => {
     const { contacts } = this.state;
 
-    let addedContact = false;
-    
-    contacts.forEach(contact => {
-      if (contact.name === name) {
-        alert(`${name} is already in contacts.`);
-        addedContact = true;
-      }
-    });
-
-    if (addedContact) {
-      return;
-    }
     const contact = {
       id: nanoid(),
       name,
       number,
     };
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
-    }));
-  }
+
+    contacts.find(option => option.name === name)
+      ? alert(`${name} is already in contacts.`)
+      : this.setState(prevState => ({
+          contacts: [...prevState.contacts, contact],
+        }));
+  };
 
   deleteContact = contactId => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(({id}) => id !== contactId),
+      contacts: prevState.contacts.filter(({ id }) => id !== contactId),
     }));
   };
 
@@ -56,13 +47,14 @@ class App extends Component {
   getVisibleContacts = () => {
     const { filter, contacts } = this.state;
     const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(({name}) =>
+    return contacts.filter(({ name }) =>
       name.toLowerCase().includes(normalizedFilter)
     );
   };
 
   render() {
-    const { getVisibleContacts, addContact, changeFilter, deleteContact } = this;
+    const { getVisibleContacts, addContact, changeFilter, deleteContact } =
+      this;
     const visibleContacts = getVisibleContacts();
 
     return (
